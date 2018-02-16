@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
 
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+
 
   def index
     @posts = Post.all
@@ -26,10 +28,14 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
-      redirect_to posts_url, notice: "l'article a bien été modifié"
+    if @post.user == current_user
+      if @post.update(post_params)
+        redirect_to posts_url, notice: "l'article a bien été modifié"
+      else
+        render :edit
+      end
     else
-      render :edit
+      redirect_to posts_url, notice: "Vous n'etes pas propriétaire"
     end
   end
 

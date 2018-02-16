@@ -6,13 +6,16 @@
   </div>
 <% end %>
 <ul>
-<% @posts.each do |post| %>
-  <li>
-    <%= link_to post.title, post %> -
-    <%= link_to 'editer', [:edit, post] %> -
-    <%= link_to 'Supprimer', post, method: :delete %>
-  </li>
-<% end %>
+  <% @posts.each do |post| %>
+    <li>
+      <%= link_to post.title, post %> -
+      <% if current_user == post.user %>
+        <%= link_to 'editer', [:edit, post] %>  -
+        <%= link_to 'Supprimer', post, method: :delete %>
+      <% end %>
+
+    </li>
+  <% end %>
 </ul>
 
 <%= link_to 'Creer un article', new_post_path %>

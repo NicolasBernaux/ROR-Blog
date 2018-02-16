@@ -17,9 +17,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    if @post.update(post_params)
-      @post.save()
+    @post = Post.create(post_params.merge(user: current_user))
+    if @post.persisted?
       redirect_to posts_url, notice: "L'article a bien été créé"
     else
       render :new

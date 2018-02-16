@@ -44,6 +44,11 @@ class PostsController < ApplicationController
     redirect_to posts_url, notice: "Le fichier a bien été supprimé"
   end
 
+  def user_posts
+    @user = User.find(params[:id])
+    @posts = Post.where(user: @user)
+  end
+
   private
 
   def set_post
@@ -54,5 +59,6 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit('title', 'content')
   end
+
 
 end

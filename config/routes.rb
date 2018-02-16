@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'users/new'
   root 'pages#index'
 
+
+  get 'user/:id', to: 'posts#user_posts'
+
   resources :posts do
     resources :comments
   end

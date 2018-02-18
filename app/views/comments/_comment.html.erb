@@ -1,3 +1,16 @@
-<p><%= comment.body %> </p>
-<p><%= time_ago_in_words(comment.created_at) %></p>
-<br>
+<div class="row">
+  <section class="col s12 m4">
+    <h5><%= comment.user.username %> </h5>
+    <p><%= comment.body %> </p>
+    <p>
+      <%= time_ago_in_words(comment.created_at) %>
+      <% if current_user == comment.user %>
+        <%= link_to 'Editer', edit_post_comment_path(post_id: @post.id, id: comment.id) %>
+      <% end %>
+      <% if current_user == comment.user || current_user == @post.user %>
+        <%= link_to t("post.delete"), post_comment_path(@post, comment), method: :delete %>
+      <% end %>
+    </p>
+    <div class="col s12 divider"></div>
+  </section>
+</div>

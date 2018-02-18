@@ -1,21 +1,14 @@
-<h1>Articles</h1>
+<h1 class="yellow-text text-darken-4">Articles</h1>
 
 <% if flash[:notice] %>
   <div class="alert">
     <%= notice %>
   </div>
 <% end %>
-<ul>
-  <% @posts.each do |post| %>
-    <li>
-      <%= link_to post.title, post %> -
-      <% if current_user == post.user %>
-        <%= link_to 'editer', [:edit, post] %>  -
-        <%= link_to 'Supprimer', post, method: :delete %>
-      <% end %>
-
-    </li>
-  <% end %>
-</ul>
+  <div class="row">
+    <% @posts.each do |post| %>
+      <%= render 'posts/post', {post: post} %>
+    <% end %>
+  </div>
 
 <%= link_to 'Creer un article', new_post_path %>

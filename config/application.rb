@@ -17,5 +17,6 @@ module Blog
     #
     config.generators.assets = false
     config.generators.helper = false
+    config.i18n.default_locale = :fr
   end
 end

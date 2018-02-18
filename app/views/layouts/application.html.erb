@@ -1,14 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Blog</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Blog</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <body>
-    <%= yield %>
-  </body>
+  <!-- Materialize -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!-- end Materialize -->
+
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-wrapper">
+    <div class="container">
+      <%= link_to t("header.home"), root_path, class: 'brand-logo' %>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <% if current_user %>
+          <li><%= link_to 'Articles', posts_path %></li>
+          <li><%= link_to current_user.username, user_infos_path(id: current_user.id) %></li>
+          <li>
+            <%= link_to destroy_user_session_path, :method => 'delete' do %>
+              <i class="material-icons">power_settings_new</i>
+            <% end %>
+          </li>
+        <% else %>
+          <li><%= link_to "Log in", new_session_path(resource_name) %><br /></li>
+          <li><%= link_to "Sign up", new_registration_path(resource_name) %></li>
+        <% end %>
+        <li><%= link_to 'En', url_for( :locale => 'en' ) %></li>
+        <li><%= link_to 'Fr', url_for( :locale => 'fr' ) %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <%= yield %>
+</div>
+</body>
 </html>

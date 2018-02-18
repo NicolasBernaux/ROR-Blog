@@ -1,5 +1,15 @@
-<h1>Salut</h1>
+<h1 class="yellow-text text-darken-4"><%= t("title.article") %></h1>
 
-<% @posts.each do |post| %>
-    <%= render 'posts/post', {post: post}  %>
-<% end %>
+<div class="row">
+  <% @posts.each do |post| %>
+    <%= render 'posts/post', {post: post} %>
+  <% end %>
+</div>
+
+<h1 class="yellow-text text-darken-4"><%= t("title.news") %></h1>
+
+<div class="row">
+  <% @content['articles'].each do |article| %>
+    <%= render "news/new", {article: article} %>
+  <% end %>
+</div>

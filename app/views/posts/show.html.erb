@@ -1,9 +1,14 @@
-<a href="<%= posts_path %>">Liste d'articles</a>
+<div class="row">
+  <h1 class="col s12 center-align"><%= @post.title %> </h1>
+  <%= link_to @post.user.username, user_infos_path(id: @post.user.id) %>
 
-<h1><%= @post.title %> </h1>
-<p><%= @post.user.username %></p>
-<p><%= @post.content %> </p>
-<h2><%= @post.comments.count %> </h2>
-<%= render @post.comments %>
+  <p><%= @post.content %> </p>
+  <div class="divider"></div>
+  <div class="row">
+  <h3 class="col">Commentaires</h3><p class="col">(<%= @post.comments.count %>)</p>
+  </div>
 
-<%= render 'comments/form' %>
+  <%= render @post.comments %>
+</div>
+<%= @post.id %>
+<%= render 'comments/form', {post: @post} %>

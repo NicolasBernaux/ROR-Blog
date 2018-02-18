@@ -1,0 +1,16 @@
+fr:
+  title:
+    article: "Articles"
+    news: "Actualité"
+
+  header:
+    home: "Accueil"
+
+  comment: "Commentaires"
+  post:
+    see: "Voir"
+    edit: "Editer"
+    delete: "Supprimer"
+
+
+  ## Il manque la traduction pour les dates

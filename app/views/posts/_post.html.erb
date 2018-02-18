@@ -1,8 +1,19 @@
-<div class="post">
-  <h2 class="post__title">
-    <%= post.title %>
-  </h2>
-  <p>
-    <%= truncate(post.content, :length => 100) %>
-  </p>
+<div class="col s12 m6">
+  <div class="card darken-1">
+
+    <div class="card-content">
+      <span class="card-title"><%= post.title %></span>
+      <%= link_to post.user.username, user_infos_path(id: post.user.id) %>
+      <p><%= truncate(post.content, :length => 100) %></p>
+    </div>
+
+    <div class="card-action">
+      <%= link_to t("post.see"), post_path(id: post.id) %>
+      <% if current_user == post.user %>
+        <%= link_to t("post.edit"), [:edit, post] %>
+        <%= link_to t("post.delete"), post, method: :delete %>
+      <% end %>
+    </div>
+
+  </div>
 </div>
